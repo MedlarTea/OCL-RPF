@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- bbox detection and feature extraction -->
+  <!-- <node pkg="mono_tracking" type="detect.py" name="mono_tracking_detect" output="screen" cwd='node' launch-prefix="xterm -e python -m pdb "/> -->
+
+  <!-- monocular tracking -->
+  <node pkg="mono_tracking" type="mono_tracking_node" name="mono_tracking" output="screen" >
+    <!-- detection parameters -->
+    <param name="detection_border_thresh_w" value="30"/>
+    <param name="detection_border_thresh_h" value="5"/>
+    <param name="detection_confidence_thresh" value="0.2"/>
+
+    <param name="init_neck_height" value="1.4"/>
+    <param name="init_waist_height" value="0.94"/>
+    <param name="init_ankle_height" value="0.53"/>
+    <param name="init_real_width" value="0.56"/>
+    
+
+    <!-- KF parameters -->
+
+    <!-- Linear regression params-->
+    <!-- <param name="coefficient_distance_width" value="-48.494"/>
+    <param name="bias_distance_width" value="349.495"/> -->
+    <!-- Exponential regression params-->
+    <!-- <param name="coefficient_width_distance" value="-0.0062"/>
+    <param name="bias_width_distance" value="2.2757"/> -->
+
+    <param name="init_cov_scale" value="0.1"/>
+    <param name="process_noise_std" value="0.1"/>
+    <param name="process_noise_pos_cov" value="0.03"/>
+    <param name="process_noise_vel_cov" value="0.1"/>
+    
+    <param name="measurement_noise_pix_cov" value="25"/>
+    <!-- <param name="measurement_noise_distance_cov" value="0.5"/> -->
+    
+
+    <!-- tracking parameters -->
+    <!-- target's real width-->
+    <!-- <param name="real_width" value="0.55"/> -->
+    <param name="max_dist" value="300"/>
+    <!-- <param name="lambda" value="0.5"/> -->
+    <param name="tracking_remove_trace_thresh" value="5.0"/>
+    <param name="tracking_remove_counts_thresh" value="10"/>
+    <param name="validation_correction_cound" value="2"/>
+    <!-- <param name="association_maha_sq_thresh" value="9.0"/> -->
+  </node>
+</launch>

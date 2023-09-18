@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="publish_dummy_frames" default="false"/>
+  <!-- Run with our DINGO-->
+  <arg name="camera_xyz" default="-0.057 0 0.181"/>
+  <arg name="camera_rpy" default="-1.57 0 -1.17" />
+  <!-- <arg name="camera_rpy" default="-1.57 0 -1.27" /> -->
+  <!-- Run with our icvs datasets-->
+  <!-- <arg name="camera_xyz" default="0 0 0.80"/>
+  <arg name="camera_rpy" default="-1.57 0 -1.57" /> -->
+  <arg name="camera_optical_frame" default="camera_color_optical_frame"/>
+
+  <group if="$(arg publish_dummy_frames)">
+    <!-- <node pkg="tf" type="static_transform_publisher" name="odom2base_footprint" args="0 0 0 0 0 0 odom base_footprint 10"/> -->
+    <node pkg="tf" type="static_transform_publisher" name="odom2base_link" args="0 0 0 0 0 0 odom base_link 10"/>
+    <!-- <node pkg="tf" type="static_transform_publisher" name="base_footprint2base_link" args="0 0 0 0 0 0 base_link base_footprint 10"/> -->
+  </group>
+
+  <node pkg="tf" type="static_transform_publisher" name="base_link2velodyne" args="0 0 0 0 0 0 base_link velodyne 10"/>
+  <node pkg="tf" type="static_transform_publisher" name="base_link2camera_optical_link" args="$(arg camera_xyz) $(arg camera_rpy) base_link $(arg camera_optical_frame) 10"/>
+  <!-- <node pkg="tf" type="static_transform_publisher" name="camera_link2camera_optical_link" args="0 0 0 -1.570796 0 -1.570796 camera_link $(arg camera_optical_frame) 10"/> -->
+  <!-- <node pkg="tf" type="static_transform_publisher" name="camera_link2camera_optical_link" args="0 0.015 0 -1.569 0.004 -1.566 camera_link $(arg camera_optical_frame) 10"/> -->
+
+</launch>

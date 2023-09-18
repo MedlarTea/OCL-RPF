@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="publish_dummy_frames" default="false"/>
+  <arg name="camera_xyz" default="0 0 0.88"/>
+  <arg name="camera_rpy" default="0 0 0" />
+  <arg name="camera_optical_frame" default="camera_color_optical_frame"/>
+
+  <group if="$(arg publish_dummy_frames)">
+    <!-- <node pkg="tf" type="static_transform_publisher" name="odom2base_footprint" args="0 0 0 0 0 0 odom base_footprint 10"/> -->
+    <!-- <node pkg="tf" type="static_transform_publisher" name="base_footprint2base_link" args="0 0 0 0 0 0 base_footprint base_link 10"/> -->
+    <node pkg="tf" type="static_transform_publisher" name="odom2base_link" args="0 0 0 0 0 0 odom base_link 10"/>
+  </group>
+
+  <node pkg="tf" type="static_transform_publisher" name="base_link2camera" args="$(arg camera_xyz) $(arg camera_rpy) base_link camera_link 10"/>
+  <node pkg="tf" type="static_transform_publisher" name="camera_link2camera_optical_link" args="0 0 0 -1.570796 0 -1.570796 camera_link $(arg camera_optical_frame) 10"/>
+  <!-- <node pkg="tf" type="static_transform_publisher" name="camera_link2camera_optical_link" args="0 0.015 0 -1.569 0.004 -1.566 camera_link $(arg camera_optical_frame) 10"/> -->
+
+</launch>

@@ -1,0 +1,3 @@
+mono_tracking/scripts/AlphaPose/Models/*
+mono_tracking/scripts/AlphaPose/YOLOX/weights/*
+.vscode

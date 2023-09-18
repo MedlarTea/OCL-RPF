@@ -1,0 +1,9 @@
+#goal definition
+sensor_msgs/Image[] pos_image_patches
+sensor_msgs/Image[] neg_image_patches
+---
+#result definition
+int32[] sequence
+---
+#feedback
+int32[] sequence

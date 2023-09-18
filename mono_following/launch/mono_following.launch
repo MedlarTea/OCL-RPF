@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+<arg name="evaluate" default="false"/>
+<arg name="scene" default="corridor_corners"/>
+<arg name="store_dir" default="/media/yjw/Elements/August/icvs2017_dataset/$(arg scene)/results" />
+<node pkg="mono_following" type="mono_following_node.py" name="mono_following_node" output="screen" cwd='node'>
+    <param name="evaluate" value="$(arg evaluate)"/>
+    <param name="track_store_dir" value="$(arg store_dir)"/>
+    <param name="initial_training_num_samples" value="5"/>
+    <param name="min_target_confidence" value="-1"/>
+    <param name="id_switch_detection_thresh" value="0.35"/>
+    <param name="reid_pos_confidence_thresh" value="0.60"/>
+    <param name="reid_neg_confidence_thresh" value="0.3"/>
+    <param name="reid_positive_count" value="5"/>
+</node>
+</launch>

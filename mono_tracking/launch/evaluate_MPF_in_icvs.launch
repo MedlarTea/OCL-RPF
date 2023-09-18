@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<launch>
+  <!--robot tf frames-->
+  <arg name="evaluate" default="false"/>  <!-- Whether to evaluate the result, it will save the estimated result-->
+  <arg name="scene" default="corridor_corners"/>
+  <arg name="bag_file" default="/media/yjw/Elements/August/icvs2017_dataset/$(arg scene)/images.bag"/>
+  <arg name="sim" default="true"/>
+  <param name="use_sim_time" value="true" />
+
+  <node pkg="image_transport" type="republish" name="decompress" args="compressed in:=/camera/color/image_raw raw out:=/camera/color/image_raw" if="$(arg sim)"/>
+
+  <include file="$(find mono_tracking)/launch/robot_frames.launch" />
+
+  <!-- mono detection-->
+  <!-- <include file="$(find mono_tracking)/launch/mono_detect.launch" /> -->
+  <node pkg="mono_tracking" type="detect.py" name="mono_tracking_detect" output="screen" cwd='node'/>
+
+  <!-- mono tracking-->
+  <include file="$(find mono_tracking)/launch/mono_tracking.launch" />
+
+  <!-- mono following-->
+  <include file="$(find mono_following)/launch/mono_following.launch" >
+  <arg name="scene" value="$(arg scene)"/>
+  <arg name="evaluate" value="$(arg evaluate)"/>
+  </include>
+
+  <node pkg="rviz" type="rviz" name="rviz"
+        args="-d $(find mono_tracking)/rviz/mono_tracking.rviz"/>
+  
+  <node pkg="rosbag" type="play" name="player" output="screen" args="-r 0.4 --clock -d 10 $(arg bag_file)" required="true"/>
+  
+</launch>
