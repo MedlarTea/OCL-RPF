@@ -79,20 +79,23 @@ class MonoFollowing:
         _hyper_config = mmcv.Config.fromfile(_hyper_config)
         _identifier_config = mmcv.Config.fromfile(_identifier_config)
         self.discriminator = init_model(_config, None, device=self.device, hyper_config=_hyper_config, identifier_config=_identifier_config, seed=123)
-        self.image_path = "/home/hjyeee/Data/Dataset/lab-reid/real-world/001"
+        self.image_path = "/home/hjyeee/Data/Dataset/lab-reid/real-world-2/001"
 
     def cal_dist(self, person_pose):
         return np.linalg.norm([person_pose.pose.position.x, person_pose.pose.position.y, person_pose.pose.position.z])
 
     def init_target(self, track_ids, track_dists):
         # distance = 5.0
-        target_id = 0
+        target_id = 17
         # for i in range(len(track_ids)):
         #     current_dis = track_dists[i]
         #     if current_dis < distance:
         #         target_id = track_ids[i]
         #         distance = current_dis
-        return target_id
+        if len(track_ids) >0:
+            return track_ids[0]
+        else:
+            return None
 
     def callback(self, tracks_msg, image_msg):
         print("---------- REID CALLBACK ----------")

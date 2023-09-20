@@ -6,7 +6,7 @@
   <!-- monocular tracking -->
   <node pkg="mono_tracking" type="mono_tracking_node" name="mono_tracking" output="screen" >
     <!-- detection parameters -->
-    <param name="detection_border_thresh_w" value="30"/>
+    <param name="detection_border_thresh_w" value="10"/>
     <param name="detection_border_thresh_h" value="5"/>
     <param name="detection_confidence_thresh" value="0.2"/>
 
