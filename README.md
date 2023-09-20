@@ -39,10 +39,10 @@ Run with our self-built dataset as ROSBAG:
 ```bash
 roslaunch mono_tracking all_mono_tracking.launch sim:=true
 # play bag
-rosbag play --clock -r 0.2 2022-07-15-17-09-34.bag
+rosbag play --clock xxx.bag
 ```
 
-Run with our DINGO:
+Run with the robot:
 ```bash
 roslaunch mono_tracking all_mono_tracking.launch sim:=false
 ```
