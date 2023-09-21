@@ -49,7 +49,7 @@ class MonoDetector:
         self.joints_detect_time = AverageMeter()
         self.once_time = AverageMeter()
         self.nums = 0
-        self.print_freq = 20
+        self.print_freq = 100
         rospy.loginfo("MonoDetector is ready!")
         rospy.spin()
     

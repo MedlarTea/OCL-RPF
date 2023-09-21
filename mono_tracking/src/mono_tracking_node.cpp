@@ -209,7 +209,6 @@ private:
         
         auto duration_time = duration_cast<milliseconds>(high_resolution_clock::now() - start);
         result_fname << "time: " << duration_time.count() << "ms" << endl; 
-        
     }
 
     spencer_tracking_msgs::TrackedPersonsPtr create_people_msgs(const ros::Time& stamp){
@@ -219,6 +218,7 @@ private:
         tracked_msgs->header.stamp = stamp;
         tracked_msgs->header.frame_id = "base_link";
         // cout << "peopleNums: " << people_tracker->get_people().size() << endl;
+        std::cout << "--------------Tracks--------------" << std::endl;
         for(const auto& person : people_tracker->get_people())
         {
             if(!person->is_valid())
@@ -260,7 +260,7 @@ private:
                 }
             }
             // tracked_person->box
-            
+            std::cout << "[" << tracked_person->track_id << "] "<< "(x y): " << tracked_person->pose.pose.position.x << " " << tracked_person->pose.pose.position.y << std::endl;
             tracked_msgs->tracks.push_back(*tracked_person);
         }
         return tracked_msgs;

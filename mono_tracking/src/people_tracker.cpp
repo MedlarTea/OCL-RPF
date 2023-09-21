@@ -62,10 +62,14 @@ void PeopleTracker::correct(ros::NodeHandle& nh, const ros::Time& stamp, const s
                 // }
 
                 PersonTracker::Ptr tracker(new PersonTracker(nh, track_system, stamp, id_gen++, observations[i]));
+                // DO NOT init person tracker that is far away from the robot
+                Eigen::Vector2f person_pos = tracker->pos();
+                if (person_pos(0)>0 && sqrt(person_pos(0)*person_pos(0) + person_pos(1)*person_pos(1)) < 10.0 ){
+                    tracker->correct(stamp, observations[i]);
+                    people.push_back(tracker);
+                }
                 // cout << "correct C" << endl;
                 // cout << 
-                tracker->correct(stamp, observations[i]);
-                people.push_back(tracker);
             }
         }
     }

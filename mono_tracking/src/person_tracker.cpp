@@ -40,6 +40,7 @@ PersonTracker::PersonTracker(ros::NodeHandle& nh, const std::shared_ptr<TrackSys
 		mean.head<2>() = estimate_init_state_by_single(track_system, measurement);
 		Eigen::Vector4f pos_in_cam = track_system->footprint2camera * Eigen::Vector4f(mean(0), mean(1), 0.0, 1.0);
 		real_width =  (box(2)-box(0)) * pos_in_cam(2) / track_system->camera_matrix(0,0);
+		cout << "[Init Pos] (x,y) " << mean(0) << " " << mean(1) << endl;
 	}
 	// else{
 
@@ -49,8 +50,9 @@ PersonTracker::PersonTracker(ros::NodeHandle& nh, const std::shared_ptr<TrackSys
 	Eigen::MatrixXf cov = Eigen::MatrixXf::Identity(4, 4) * nh.param<double>("init_cov_scale", 1.0);
 
 	// self.alpha**2 * (n +self.kappa) - n = 1**2 * (7-4) - 7 = 
-	ukf.reset(new UnscentedKalmanFilter(track_system, mean, cov, 1.0));
 
+
+	ukf.reset(new UnscentedKalmanFilter(track_system, mean, cov, 1.0));
 	prev_stamp = stamp;
 	correction_count_ = 0;
 	prediction_count_ = 0;
