@@ -6,7 +6,7 @@
   <arg name="decrompress" default="false"/> <!--Input compressed image or not -->
   <arg name="evaluate" default="false"/>  <!-- Whether to evaluate the result, it will save the estimated result-->
 
-  <!-- <include file="$(find go1_description)/launch/go1_rviz.launch" /> -->
+  <include file="$(find go1_description)/launch/go1_rviz.launch" />
 
   <node pkg="image_transport" type="republish" name="decompress" args="compressed in:=/camera/color/image_raw raw out:=/camera/color/image_raw" if="$(arg decrompress)"/>
 
@@ -19,9 +19,9 @@
   <include file="$(find mono_tracking)/launch/mono_tracking.launch" />
 
   <!-- mono following-->
-  <!-- <include file="$(find mono_following)/launch/mono_following.launch" >
+  <include file="$(find mono_following)/launch/mono_following.launch" >
   <arg name="evaluate" value="$(arg evaluate)"/>
-  </include> -->
+  </include>
 
   <node pkg="rviz" type="rviz" name="rviz"
         args="-d $(find mono_tracking)/rviz/mono_tracking_ModelOnly.rviz"/>

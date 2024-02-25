@@ -71,7 +71,8 @@ class MonoFollowing:
         self.device = "cuda:0"
         mmtracking_dir = "/home/hjyeee/Projects/Mono_following/codes/baselines/OnlineReID"
         ocl_rpf_config = "configs/rpf/identifier/part_weighted_identifier_r18.py"
-        ocl_identifier_config = "configs/rpf/identifier/part_lt_reservoir.py"
+        ocl_identifier_config = "configs/rpf/identifier/part_dual_lt_reservoir.py"
+        # ocl_identifier_config = "configs/rpf/identifier/part_lt_reservoir.py"
         _config = osp.join(mmtracking_dir, ocl_rpf_config)
         _hyper_config = "/home/hjyeee/Projects/Mono_following/codes/baselines/evaluation-on-JRDB/mmtracking-based/configs/rpf/lab_reid.py"
         _identifier_config = osp.join(mmtracking_dir, ocl_identifier_config)
@@ -79,7 +80,8 @@ class MonoFollowing:
         _hyper_config = mmcv.Config.fromfile(_hyper_config)
         _identifier_config = mmcv.Config.fromfile(_identifier_config)
         self.discriminator = init_model(_config, None, device=self.device, hyper_config=_hyper_config, identifier_config=_identifier_config, seed=123)
-        self.image_path = "/home/hjyeee/Data/Dataset/lab-reid/real-world-2/001"
+        self.image_path = "/home/hjyeee/Data/Dataset/lab-reid/real-world-2/002"
+        self.target_image_path = "/home/hjyeee/Data/Dataset/lab-reid/real-world-2/002-target"
 
     def cal_dist(self, person_pose):
         return np.linalg.norm([person_pose.pose.position.x, person_pose.pose.position.y, person_pose.pose.position.z])
@@ -118,7 +120,7 @@ class MonoFollowing:
             track_msgs[track.track_id] = track
             track_dists.append(self.cal_dist(track.pose))
             x,y,w,h,confidence = (track.bounding_box.x, track.bounding_box.y, track.bounding_box.w, track.bounding_box.h, track.bounding_box.confidence)
-            track_bboxes.append([x, y, x+w, y+h, confidence])
+            track_bboxes.append([x, y, x+w, y+h])
             track_ids.append(track.track_id)
             # do not use neck joint
             t_joints = []
@@ -144,6 +146,24 @@ class MonoFollowing:
             self.target_id = ident_result["target_id"]
             self.frame_id += 1
         ### use mmtrack's identifier to find the target ###
+
+        buffer_imgs = ident_result.get("buffer_imgs", None)
+        if buffer_imgs is not None:
+            for par_id in buffer_imgs.keys():
+                for y_int in buffer_imgs[par_id].keys():
+                    bu_imgs = buffer_imgs[par_id][y_int]  # torch.tensor
+                    print(bu_imgs.shape)
+                    print(par_id, y_int)
+                    _dir = osp.join(self.target_image_path, "buffer_imgs", str(par_id)+"_"+str(y_int))
+                    if not os.path.exists(_dir):
+                        os.makedirs(_dir)
+                    for j in range(bu_imgs.shape[0]):
+                        bu_img = bu_imgs[j].permute(1, 2, 0).cpu().numpy()
+                        if bu_img.size == 0:
+                            continue
+                        # print(image.shape)
+                        bu_img_bgr = cv2.cvtColor(bu_img, cv2.COLOR_RGB2BGR)
+                        cv2.imwrite(osp.join(_dir, "{:04d}.jpg".format(j)), bu_img_bgr)
         
         # publish target information
         target = TargetPerson()
@@ -170,7 +190,9 @@ class MonoFollowing:
         if self.image_pub.get_num_connections():
             image_bgr = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
             tracks_result = ident_result["tracks_target_conf_bbox"] if len(ident_result) != 0 else {}
-            image_bgr = self.visualize(image_bgr, tracks_result)
+            image_bgr, target_image = self.visualize(image_bgr, tracks_result)
+            # if target_image is not None:
+                # cv2.imwrite(osp.join(self.target_image_path, "{:04d}.jpg".format(self.frame_id)), target_image)
             cv2.imwrite(osp.join(self.image_path, "{:04d}.jpg".format(self.frame_id)), image_bgr)
             image_msg = ros_numpy.msgify(Image, image_bgr, encoding = "bgr8")
             self.image_pub.publish(image_msg)
@@ -188,11 +210,14 @@ class MonoFollowing:
     def visualize(self, original_image, tracks):
         # print("VISUALIZE")
         image = original_image.copy()
+        target_img = None
         for idx in tracks.keys():
             if tracks[idx][0] == None:
                 continue
             image = cv2.putText(original_image, self.state, (20, 60), cv2.FONT_HERSHEY_PLAIN, 2, (255, 255, 255), 2)
             if idx == self.target_id:
+                target_img = original_image.copy()
+                target_img = target_img[tracks[idx][2][1]:tracks[idx][2][3], tracks[idx][2][0]:tracks[idx][2][2], :]
                 image = cv2.rectangle(image, (tracks[idx][2][0],tracks[idx][2][1]), (tracks[idx][2][2],tracks[idx][2][3]), (0,255,0), 3)
                 image = cv2.putText(image, "id:{:d}".format(idx), ((int((tracks[idx][2][0]+tracks[idx][2][2])/2-5), int((tracks[idx][2][1]+tracks[idx][2][3])/2-5))), cv2.FONT_HERSHEY_DUPLEX, 1, (0,255,0), 1)
                 # image = cv2.putText(image, "score:{:.3f}".format(tracks[idx].target_confidence), ((int((tracks[idx].region[0]+tracks[idx].region[2])/2-35), int((tracks[idx].region[1]+tracks[idx].region[3])/2-35))), cv2.FONT_HERSHEY_DUPLEX, 1, (0,255,0), 1)
@@ -201,7 +226,7 @@ class MonoFollowing:
                 image = cv2.putText(image, "id:{:d}".format(idx), ((int((tracks[idx][2][0]+tracks[idx][2][2])/2-5), int((tracks[idx][2][1]+tracks[idx][2][3])/2-5))), cv2.FONT_HERSHEY_DUPLEX, 1, (0,0,255), 1)
                 # image = cv2.putText(image, "score:{:.3f}".format(tracks[idx].target_confidence), ((int((tracks[idx].region[0]+tracks[idx].region[2])/2-35), int((tracks[idx].region[1]+tracks[idx].region[3])/2-35))), cv2.FONT_HERSHEY_DUPLEX, 1, (0,0,255), 1)
 
-        return image
+        return image, target_img
     
     def saveTrack(self, track_id, track, store_path):
         print("SAVE TRACKS")

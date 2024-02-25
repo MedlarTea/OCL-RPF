@@ -37,6 +37,8 @@ python setup.py install
 
 Run with our self-built dataset as ROSBAG:
 ```bash
+# open go1 model
+roslaunch go1_description go1_rviz.launch
 roslaunch mono_tracking all_mono_tracking.launch sim:=true
 # play bag
 rosbag play --clock xxx.bag
