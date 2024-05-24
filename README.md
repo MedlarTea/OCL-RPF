@@ -13,7 +13,8 @@
 ```
 conda create -n mono_following python=3.8
 conda activate mono_following
-# Install mmtrack
+### Install mmtrack (core code for target-ReID) ###
+This code will be released when the paper is accepted
 ...
 ```
 
