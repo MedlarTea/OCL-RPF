@@ -13,7 +13,8 @@
 ```
 conda create -n mono_following python=3.8
 conda activate mono_following
-# Install mmtrack
+### Install mmtrack (core code for target-ReID) ###
+This code will be released when the paper is accepted
 ...
 ```
 
@@ -57,7 +58,12 @@ roslaunch mono_tracking evaluate_MPF_in_icvs.launch scene:=corridor_corners
 ```
 ## Citation
 ```
-
+@article{ye2023person,
+  title={Person Re-Identification for Robot Person Following with Online Continual Learning},
+  author={Ye, Hanjing and Zhao, Jieting and Zhan, Yu and Chen, Weinan and He, Li and Zhang, Hong},
+  journal={arXiv preprint arXiv:2309.11727},
+  year={2023}
+}
 ```
 
 ## Acknowledgement
