@@ -46,9 +46,9 @@ Download pre-trained weights for OCLReID
 ### For Robot/Rosbag Running (optionally)
 For running a complete RPF system, besides the above installation, some packages need to be installed:
 - ROS, verified in melodic and noetic
-- OpenCV with 3.4.12
-- Eigen with 3.0+
-- Ceres
+- OpenCV == 3.4.12 (tested)
+- Eigen == 3.4.0 (tested)
+- Ceres == 2.1.0 (tested)
 
 Download pre-trained weights for OCL-RPF:
 - Download bounding-box detection models: [yolox-s](https://megvii-my.sharepoint.cn/:u:/g/personal/gezheng_megvii_com/EW62gmO2vnNNs5npxjzunVwB9p307qqygaCkXdTO88BLUg?e=NMTQYw) and [yolox-m](https://megvii-my.sharepoint.cn/:u:/g/personal/gezheng_megvii_com/ERMTP7VFqrVBrXKMU7Vl4TcBQs0SUeCT7kvc-JdIbej4tQ?e=1MDo9y), then make directory `mono_tracking/scripts/AlphaPose/YOLOX/weights` and put the checkpoints to it.
