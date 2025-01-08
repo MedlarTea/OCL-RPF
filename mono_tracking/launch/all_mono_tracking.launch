@@ -5,7 +5,7 @@
   <param name="use_sim_time" value="$(arg sim)" />
   <arg name="decompress" default="true"/> <!--Input compressed image or not -->
   <arg name="evaluate" default="false"/>  <!-- Whether to evaluate the result, it will save the estimated result-->
-  <arg name="oclreid_dir" default="/home/hjyeee/Projects/Mono_following/codes/baselines/OCLReID" />
+  <arg name="oclreid_dir" default="/home/cai/OCLReID" />
 
   <include file="$(find go1_description)/launch/go1_rviz.launch" />
 
@@ -23,8 +23,8 @@
 
   <!-- mono following -->
   <include file="$(find mono_following)/launch/mono_following.launch" >
-  <param name="evaluate" value="$(arg evaluate)"/>
-  <param name="oclreid_dir" value="$(arg oclreid_dir)"/>
+  <arg name="evaluate" value="$(arg evaluate)"/>
+  <arg name="oclreid_dir" value="$(arg oclreid_dir)"/>
   </include>
 
   <node pkg="rviz" type="rviz" name="rviz"

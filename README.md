@@ -20,7 +20,7 @@
 
 ### For Video Running Only
 
-Create a conda environment and install OCLReID (based on mmtrack), worked in RTX3090
+Create a conda environment and install OCLReID (based on mmtrack), worked on RTX3090 and RTX2060
 ```bash
 git clone https://github.com/MedlarTea/OCLReID
 cd OCLReID
@@ -77,6 +77,7 @@ This would run the `./demo.mp4`.
 cd oclrpf_ws
 source devel/setup.bash # or devel/setup.zsh
 roslaunch mono_tracking all_mono_tracking.launch sim:=false oclreid_dir:="$YOUR_OCLReID_Path$"
+# if encountered: ImportError: /lib/libgdal.so.26: undefined symbol: TIFFReadRGBATileExt, version LIBTIFF_4.0. Solution: export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libtiff.so.5
 ```
 
 ```bash

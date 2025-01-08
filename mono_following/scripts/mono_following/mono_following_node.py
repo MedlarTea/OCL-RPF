@@ -75,8 +75,10 @@ class MonoFollowing:
         hyper_params = mmcv.Config.fromfile(osp.join(self.oclreid_dir, "tpt_configs/run_robot_hyper_params.py"))
         hyper_params.mmtracking_dir = self.oclreid_dir
 
+
         rpf_config = osp.join(self.oclreid_dir, hyper_params.rpf_config)
         rpf_config = mmcv.Config.fromfile(rpf_config)
+        rpf_config.model.reid.init_cfg.checkpoint = osp.join(self.oclreid_dir, "checkpoints/reid/resnet18.pth")
 
         identifier_config = osp.join(self.oclreid_dir, hyper_params.identifier_config)
         identifier_config = mmcv.Config.fromfile(identifier_config)

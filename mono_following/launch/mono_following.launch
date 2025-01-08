@@ -3,7 +3,7 @@
 <arg name="evaluate" default="false"/>
 <arg name="scene" default="corridor_corners"/>
 <arg name="store_dir" default="" />
-<arg name="oclreid_dir" default="/home/hjyeee/Projects/Mono_following/codes/baselines/OCLReID" />
+<arg name="oclreid_dir" default="/home/cai/OCLReID" />
 <node pkg="mono_following" type="mono_following_node.py" name="mono_following_node" output="screen" cwd='node'>
     <param name="evaluate" value="$(arg evaluate)"/>
     <param name="track_store_dir" value="$(arg store_dir)"/>
