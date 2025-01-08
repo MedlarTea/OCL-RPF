@@ -76,7 +76,7 @@ This would run the `./demo.mp4`.
 ```bash
 cd oclrpf_ws
 source devel/setup.bash # or devel/setup.zsh
-roslaunch mono_tracking all_mono_tracking.launch sim:=false oclreid_dir:="$YOUR_OCLReID_Path$"
+roslaunch mono_tracking all_mono_tracking.launch sim:=false oclreid_dir:=$YOUR_OCLReID_Path$
 # if encountered: ImportError: /lib/libgdal.so.26: undefined symbol: TIFFReadRGBATileExt, version LIBTIFF_4.0. Solution: export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libtiff.so.5
 ```
 
