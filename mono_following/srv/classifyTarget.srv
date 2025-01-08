@@ -1,0 +1,4 @@
+sensor_msgs/Image[] images
+# Descriptor[] descriptors
+---
+float64[] confidences

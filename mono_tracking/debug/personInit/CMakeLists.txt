@@ -1,0 +1,35 @@
+cmake_minimum_required(VERSION 3.5)
+project(main)
+
+# 检查c++编译器标志，设置c++11支持变量
+include(CheckCXXCompilerFlag)
+CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
+CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
+
+find_package(Eigen3 REQUIRED)
+find_package(OpenCV 3.4 REQUIRED)
+
+# 使用变量设置编译标志
+if(COMPILER_SUPPORTS_CXX11)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+elseif(COMPILER_SUPPORTS_CXX0X)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+else()
+message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
+endif()
+
+include_directories(
+  ${EIGEN3_INCLUDE_DIRS}
+  /home/jing/workspace/my_mono_foll_ws/src/mono_tracking/include
+)
+
+# 多线程
+set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
+set(THREADS_PREFER_PTHREAD_FLAG TRUE)
+find_package(Threads REQUIRED)
+if(CMAKE_USE_PTHREADS_INIT)
+    set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} "-pthread")
+endif()
+
+add_executable(main main.cpp)
+target_link_libraries(main ${CMAKE_THREAD_LIBS_INIT} ${Eigen_LIBRARIES} ${OpenCV_LIBS})

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+<node pkg="mono_tracking" type="detect.py" name="mono_tracking_detect" output="screen" cwd='node'/>
+
+</launch>

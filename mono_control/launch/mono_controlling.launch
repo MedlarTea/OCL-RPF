@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+<param name="use_sim_time" value="false" />
+<!-- <node pkg="joy" type="joy_node" name="joy_node" /> -->
+<node pkg="mono_control" type="control_node.py" name="control_node" output="screen">
+    <param name="enable_back" value="true"/>  
+    <param name="max_vx" value="2.0"/>
+    <param name="max_va" value="8.0"/>
+    <param name="gain_vx" value="0.6"/>
+    <param name="gain_va" value="2.5"/>
+    <param name="distance" value="2.0"/>
+    <param name="timeout" value="0.5"/>
+  </node>
+</launch>

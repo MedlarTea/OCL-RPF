@@ -1,0 +1,283 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 0
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Status1
+      Splitter Ratio: 0.5
+    Tree Height: 140
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Pose Estimate1
+      - /2D Nav Goal1
+      - /Publish Point1
+    Name: Tool Properties
+    Splitter Ratio: 0.5886790156364441
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz/Time
+    Experimental: false
+    Name: Time
+    SyncMode: 0
+    SyncSource: PointCloud2
+Preferences:
+  PromptSaveOnExit: true
+Toolbars:
+  toolButtonStyle: 2
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.029999999329447746
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 1
+      Class: spencer_tracking_rviz_plugin/TrackedPersons
+      Color: 130; 130; 130
+      Color map offset: 0
+      Color transform: Rainbow
+      Delete after no. cycles: 100
+      Enabled: true
+      Excluded person IDs: ""
+      Font color: 255; 255; 255
+      Font color style: Same color
+      Font scale: 2
+      History as line:
+        Line width: 0.05000000074505806
+        Value: true
+      History size: 100
+      Included person IDs: ""
+      Min. history point distance: 0.4000000059604645
+      Missed alpha: 0.5
+      Name: TrackedPersons
+      Occlusion alpha: 0.30000001192092896
+      Render covariances:
+        Line width: 0.10000000149011612
+        Value: true
+      Render detection IDs: true
+      Render history: true
+      Render person visual: true
+      Render track IDs: true
+      Render track state: true
+      Render velocities: true
+      Show DELETED tracks: false
+      Show MATCHED tracks: true
+      Show MISSED tracks: true
+      Show OCCLUDED tracks: true
+      Style:
+        Line width: 0.05000000074505806
+        Scaling factor: 1
+        Value: Cylinders
+      Topic: /mono_tracking/tracks
+      Tracking frame: odom
+      Unreliable: false
+      Value: true
+      Z offset:
+        Use Z position from message: false
+        Value: 0
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 1
+      Name: Axes
+      Radius: 0.10000000149011612
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 225
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Flat Squares
+      Topic: /velodyne_points
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Alpha: 1
+      Class: spencer_tracking_rviz_plugin/TargetPerson
+      Color: 130; 130; 130
+      Color map offset: 0
+      Color transform: Rainbow
+      Delete after no. cycles: 100
+      Enabled: true
+      Excluded person IDs: ""
+      Font color: 255; 255; 255
+      Font color style: Same color
+      Font scale: 2
+      History as line:
+        Line width: 0.05000000074505806
+        Value: true
+      History size: 100
+      Included person IDs: ""
+      Min. history point distance: 0.4000000059604645
+      Missed alpha: 0.5
+      Name: TargetPerson
+      Occlusion alpha: 0.30000001192092896
+      Render covariances:
+        Line width: 0.10000000149011612
+        Value: true
+      Render detection IDs: true
+      Render history: true
+      Render person visual: true
+      Render track IDs: true
+      Render track state: true
+      Render velocities: true
+      Show DELETED tracks: false
+      Show MATCHED tracks: true
+      Show MISSED tracks: true
+      Show OCCLUDED tracks: true
+      Style:
+        Line width: 0.05000000074505806
+        Scaling factor: 1
+        Value: Cylinders
+      Topic: /mono_following/target
+      Tracking frame: odom
+      Unreliable: false
+      Value: true
+      Z offset:
+        Use Z position from message: false
+        Value: 0
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /camera/color/image_raw
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /mono_following/vis_image
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
+    - Class: rviz/Image
+      Enabled: true
+      Image Topic: /mono_detection/visualization
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Default Light: true
+    Fixed Frame: base_link
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
+      Theta std deviation: 0.2617993950843811
+      Topic: /initialpose
+      X std deviation: 0.5
+      Y std deviation: 0.5
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz/PublishPoint
+      Single click: true
+      Topic: /clicked_point
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 22.047014236450195
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Focal Point:
+        X: 2.257280111312866
+        Y: -2.257280111312866
+        Z: -6.239861249923706e-8
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05000000074505806
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 0.6703979969024658
+      Target Frame: <Fixed Frame>
+      Value: Orbit (rviz)
+      Yaw: 1.8353971242904663
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 1412
+  Hide Left Dock: false
+  Hide Right Dock: true
+  Image:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd00000004000000000000035a000004ebfc020000000dfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d000000c9000000c900fffffffb0000000a0049006d006100670065010000010c000001610000001600fffffffb0000000a0049006d00610067006501000002730000015d0000001600fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d00610067006501000003d6000001520000001600fffffffb0000000a0049006d0061006700650000000431000000d70000000000000000fb0000000a0049006d0061006700650100000394000001740000000000000000000000010000010f00000363fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d00000363000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e1000001970000000300000a0000000039fc0100000002fb0000000800540069006d0065010000000000000a00000002eb00fffffffb0000000800540069006d00650100000000000004500000000000000000000006a0000004eb00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Views:
+    collapsed: true
+  Width: 2560
+  X: 2560
+  Y: 0

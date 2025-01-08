@@ -1,0 +1,7 @@
+sensor_msgs/Image[] images
+Box[] boxes
+float32[] distances
+# Descriptor[] descriptors
+int32[] labels
+---
+bool isSuccessed

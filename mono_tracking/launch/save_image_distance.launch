@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <!--robot tf frames-->
+  <param name="use_sim_time" value="true" />
+
+  <!-- <node pkg="image_transport" type="republish" name="decompress" args="compressed in:=/camera/color/image_raw raw out:=/camera/color/image_raw"/> -->
+
+  <node pkg="mono_tracking" type="evaluate_distance_by_mc" name="evaluate_distance_by_mc" output="screen"/>
+  
+</launch>
