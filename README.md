@@ -10,12 +10,11 @@
 </p>
 
 ## TODO
-<ul>
-    <li><input type="checkbox" checked disabled> Release codes of part-based OCLReID, global-based OCLReID and part-based OCL-RPF with Reservoir-based memory manager</li>
-    <li><input type="checkbox" disabled> Release other replay-based memory managers</li>
-    <li><input type="checkbox" disabled> Update code with multi-threads</li>
-    <li><input type="checkbox" disabled> Optimize code running efficiency</li>
-</ul>
+
+- [x] Release codes of part-based OCLReID, global-based OCLReID and part-based OCL-RPF with Reservoir-based memory manager
+- [ ] Release other replay-based memory managers
+- [ ] Update code with multi-threads
+- [ ] Optimize code running efficiency
 
 ## Install
 
