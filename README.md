@@ -41,7 +41,6 @@ pip install -v -e .
 
 Download pre-trained weights for OCLReID
   - Download 2d joint detection models: [Google drive](https://drive.google.com/drive/folders/1v-2Noym5U13BG6Zwj9EoqYRn6GXimh6p?usp=sharing) and put the checkpoints to `OCLReID/mmtrack/models/pose/Models/sppe`.
-  - Download ReID models: [Google drive](https://drive.google.com/file/d/1cjqnHFcYzFZvzLrqvzry6Bgt8mWaWILg/view?usp=drive_link), then make directory `OCLReID/checkpoints/reid` and put the checkpoints to it.
 
 ### For Robot/Rosbag Running (optionally)
 For running a complete RPF system, besides the above installation, some packages need to be installed:
@@ -68,6 +67,7 @@ catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3
 ### Video Running
 ```bash
 cd OCLReID
+conda activate oclreid
 python run_video.py --show_result
 ```
 This would run the `./demo.mp4`.
